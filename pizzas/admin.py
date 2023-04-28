@@ -5,4 +5,5 @@ from . import models
 admin.site.register([
     models.Pizza, 
     models.Rating,
+    models.RatingChoices,
     ])
