@@ -17,6 +17,9 @@ class Pizza(models.Model):
     # Automatically add date and time that the record was updated
     updated_at = models.DateTimeField(auto_now=True) 
     
+    def get_absolute_url(self):
+        return reverse("pizzas-detail", kwargs=({"pk": self.pk})
+    
     # String function so that when you output the database object title it is more descriptive
     def __str__(self):   
         return self.title

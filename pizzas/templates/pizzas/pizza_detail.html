@@ -4,7 +4,7 @@
 {% comment %} 'object' below refers to database record for recipe id that is passed from the view {% endcomment %}
 
 {% block content %} 
-    <h1>Recipes # {{ object.id }}</h1>
+    <h1>Pizza # {{ object.id }}</h1>
     <div class="card my-4" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">{{ object.title }}</h5>
@@ -12,6 +12,7 @@
           <p class="card-text">Description: {{ object.description}}</p>
           <p class="card-text">Directions: {{ object.directions}}</p>
           <h6 class="card-subtitle mb-2 text-body-secondary">Date Posted: {{ object.updated_at|date:"F d, Y"}}</h6>
+          <a class="btn btn-outline-info" href="{% url 'pizzas-delete' object.id %}">Rate</a>
         </div>
     </div>
      {% comment %} Only display if authenticated users in the author or a member of the 'staff'  {% endcomment %}
