@@ -48,3 +48,9 @@ class Rating(models.Model):
     def __str__(self):   
         return self.pizza_to_rate
     
+class Submission(models.Model):
+    title = models.TextField()
+    submission = models.FileField(upload_to='media')    
+    
+    def __str__(self):   
+        return self.title

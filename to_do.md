@@ -1,8 +1,8 @@
 # Remaining To Do
 
 - [ ] Rating Update View
-- [ ] Recipe write to file
-- [ ] Recipe import
+- [x] Recipe write to file
+- [x] Recipe import
 - [ ] Recipe write to database
 - [ ] Output ratings to variable
 - [ ] Create visualization for ratings

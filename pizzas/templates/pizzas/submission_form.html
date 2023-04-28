@@ -1,0 +1,26 @@
+{% extends 'pizzas/base.html' %}
+{% comment %} Override standard Django forms tags with Crispy Forms that provide enhanced styling and 
+contextual error message for things like duplicate username and password mismatch {% endcomment %}
+{% load crispy_forms_tags%}
+
+{% block content %}
+<div class="container">
+    <form method="POST" enctype="multipart/form-data">
+        {% comment %} crsf_token provides some secirty against malicous attacks {% endcomment %}
+       {% csrf_token %}
+       <fieldset class="form-group">
+         <legend class="border-bottom mb-4">Upload Recipe</legend>
+         <p>A staff member will review you submission before posting </p>
+         {% comment %} Display form as paragraph to enhance readability and style {% endcomment %}
+         {{ form|crispy }}
+       </fieldset> 
+        <div class="form-group py-3">
+            <input class="btn btn-outline-primary" type="submit" value="Upload Recipe">
+        </div>
+    </form>
+    <div class="border-top pt-3">
+        <a href="{% url 'pizzas-home' %}">Cancel</a>
+    </div>   
+
+</div>
+ {% endblock content %}

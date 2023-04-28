@@ -70,32 +70,15 @@ class PizzaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         pizza = self.get_object()
         return self.request.user == pizza.author    
  
-# class RatingListView(ListView):
-#     model = models.Rating
-#     # Override default Django default template name
-#     template_name = 'pizzas/home.html'
-#     # Override default Django  database object name
-#     context_object_name = 'ratings'
-    
-    
-# class RatingCreateView(CreateView):
-#     model = models.Rating
-#     # Designate fields that you want to expose to user
-#     fields = ['title', 'rating']
-    
-#     # Provide the recipe record author since author field is not displayed on form
-#     def form_valid(self, form):
-#         form.instance.author = self.request.user
-#         return super().form_valid(form)
 
-# Generate recipe text file
+# Generate cookbook text file
 def recipe_text(request):
     response = HttpResponse(content_type='text/plain')
     response['Content-Disposition'] = 'attachment; filename=recipe.txt'
     
     # Designate model
     to_print = models.Pizza.objects.all().filter()
-    success_url = reverse_lazy('pizzas-home')
+    # success_url = reverse_lazy('pizzas-home')
     
     # Create blank list
     lines = []
@@ -106,8 +89,22 @@ def recipe_text(request):
         
     response.writelines(lines)
     return response
-     
-      
+ 
+ 
+# class SubmissionListView(ListView):
+#     to_view = models.Submission.objects.all()
+#     # Override default Django default template name
+#     template_name = 'pizzas/sub_view.html'
+#     # Override default Django  database object name
+#     context_object_name = 'to_view'
     
+class SubmissionCreateView(LoginRequiredMixin, CreateView):
+    model = models.Submission
+    # Designate fields that you want to expose to user
+    # template_name = 'submission_form.html'
+    fields = ['title', 'submission']
+    success_url = reverse_lazy("pizzas-home")
+    
+              
 def about(request):
     return render(request, "pizzas/about.html", {"title": 'about the app'})
