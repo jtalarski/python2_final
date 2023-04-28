@@ -11,6 +11,20 @@ from . import models
 
 # Create your views here.
 
+def home(request):
+    pizzas = models.Pizza.objects.all()
+    context ={
+        "pizzas": pizzas
+    }
+    return render(request, "pizzas/home.html", context)
+
+def rating(request):
+    ratings = models.Rating.objects.all()
+    context ={
+        "ratings":ratings
+    }
+    return render(request, "pizzas/ratings_create.html", context)
+
 # Views built off Django default class view
 class PizzaListView(ListView):
     model = models.Pizza
@@ -26,7 +40,7 @@ class PizzaDetailView(DetailView):
 class PizzaCreateView(LoginRequiredMixin, CreateView):
     model = models.Pizza
     # Designate fields that you want to expose to user
-    fields = ['title', 'description']
+    fields = ['title', 'description', 'directions']
     
     # Provide the recipe record author since author field is not displayed on form
     def form_valid(self, form):
@@ -41,7 +55,7 @@ class PizzaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     # Only allow a user to update his own recipe
     def test_fun(self):
-        recipe = self.get_object()
+        pizza = self.get_object()
         return self.request.user == pizza.author
     
     # Provide the recipe record author since author field is not displayed on form
@@ -56,9 +70,27 @@ class PizzaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     
     # Only allow a user to delete her own recipe
     def test_func(self):
-        recipe = self.get_object()
+        pizza = self.get_object()
         return self.request.user == pizza.author    
+ 
+# class RatingListView(ListView):
+#     model = models.Rating
+#     # Override default Django default template name
+#     template_name = 'pizzas/home.html'
+#     # Override default Django  database object name
+#     context_object_name = 'ratings'
     
+    
+# class RatingCreateView(CreateView):
+#     model = models.Rating
+#     # Designate fields that you want to expose to user
+#     fields = ['title', 'rating']
+    
+#     # Provide the recipe record author since author field is not displayed on form
+#     def form_valid(self, form):
+#         form.instance.author = self.request.user
+#         return super().form_valid(form)
+
     
 def about(request):
     return render(request, "recipes/about.html", {"title": 'about us'})

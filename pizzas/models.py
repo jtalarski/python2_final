@@ -34,10 +34,10 @@ class Pizza(models.Model):
     
 class Rating(models.Model):
     # Create one to many relationship from Pizza to Ratings
-    title = models.ForeignKey(Pizza, on_delete=models.CASCADE)
+    pizza_to_rate = models.ForeignKey(Pizza, on_delete=models.CASCADE)
     rating = models.IntegerField(default=1, validators=[MaxValueValidator(5), MinValueValidator(1)])
     
     # String function so that when you output the database object title it is more descriptive
     def __str__(self):   
-        return self.title
+        return self.pizza_to_rate
     
