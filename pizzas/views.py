@@ -50,15 +50,12 @@ class PizzaCreateView(LoginRequiredMixin, CreateView):
 # Only authenticated users will be authorized to update a pizza     
 class PizzaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = models.Pizza
-    # Designate fields that you want to expose to user
-    fields = ['title', 'description']
-    
-    # Only allow a user to update his own recipe
-    def test_fun(self):
-        pizza = self.get_object()
-        return self.request.user == pizza.author
-    
-    # Provide the recipe record author since author field is not displayed on form
+    fields = ['title', 'description', 'directions', 'current_rating']
+
+    def test_func(self):
+        recipe = self.get_object()
+        return self.request.user == recipe.author
+
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
@@ -93,4 +90,4 @@ class PizzaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     
 def about(request):
-    return render(request, "recipes/about.html", {"title": 'about us'})
+    return render(request, "pizzas/about.html", {"title": 'about the app'})

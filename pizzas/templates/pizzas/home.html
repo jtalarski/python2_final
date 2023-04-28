@@ -9,7 +9,7 @@
           <h5 class="card-title">{{ pizza.title }}</h5>
           <h6 class="card-subtitle mb-2 text-body-secondary">Chef: {{ pizza.author }}</h6>
           <h6 class="card-text">Description: {{ pizza.description}}</h6>
-          <p class=card-text>Rating: {(pizza.current_rating )}< /p?
+          <h6 class="card-text">Rating: {{ pizza.current_rating}}</h6>
           <h6 class="card-subtitle mb-2 text-body-secondary">Date Posted: {{ pizza.updated_at|date:"F d, Y"}}</h6>
           <a href="{% url 'pizza-detail' pizza.pk %}" class="card-link">View Recipe</a>
         </div>
