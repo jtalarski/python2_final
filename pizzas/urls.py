@@ -12,4 +12,5 @@ urlpatterns = [
     path('pizza/<int:pk>/update/', views.PizzaUpdateView.as_view(), name="pizzas-update"),
     path('pizza/<int:pk>/delete/', views.PizzaDeleteView.as_view(), name="pizzas-delete"),
     path('about/', views.about, name='about the app'),
+    path('recipe_text/', views.recipe_text, name="recipe_text"), 
     ]
