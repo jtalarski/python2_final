@@ -61,7 +61,7 @@ class PizzaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return super().form_valid(form)
     
 class PizzaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = models.Pizza.objects.all()
+    model = models.Pizza
     # Redirect the user to the home page after deleting a pizza
     success_url = reverse_lazy('pizzas-home')
     
@@ -88,26 +88,6 @@ class PizzaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 #         form.instance.author = self.request.user
 #         return super().form_valid(form)
 
-# Generate recipe text file
-def recipe_text(request):
-    response = HttpResponse(content_type='text/plain')
-    response['Content-Disposition'] = 'attachment; filename=recipe.txt'
-    
-    # Designate model
-    to_print = models.Pizza.objects.all().filter()
-    success_url = reverse_lazy('pizzas-home')
-    
-    # Create blank list
-    lines = []
-    
-    # Loop through query
-    for recipe in to_print:
-        lines.append(f'__{recipe.title}__\n\n{recipe.description}\n\ndirections:\n{recipe.directions}\n\nrating: {recipe.current_rating}  chef: {recipe.author}\n\n\n')
-        
-    response.writelines(lines)
-    return response
-     
-      
     
 def about(request):
     return render(request, "pizzas/about.html", {"title": 'about the app'})

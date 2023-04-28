@@ -31,4 +31,3 @@
 - [ ] Database integration CRUD
 - [ ] Visualization
 - [ ] API integration
-- [ ] Regex
