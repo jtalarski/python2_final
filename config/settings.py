@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     # local apps
     'pizzas',
     'users',
-    'recipe_api'
     
     # 3rd party apps
     'crispy_forms',
