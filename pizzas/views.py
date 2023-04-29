@@ -6,6 +6,11 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 
+# Import REST api modules
+from rest_framework import viewsets
+from rest_framework import permissions
+from .serializers import PizzaSerializer
+
 # Local module imports
 from . import models
 
@@ -104,7 +109,12 @@ class SubmissionCreateView(LoginRequiredMixin, CreateView):
     # template_name = 'submission_form.html'
     fields = ['title', 'submission']
     success_url = reverse_lazy("pizzas-home")
-    
-              
+ 
+# API-specific class that groups all common view behaviors into one
+class PizzaViewSet(viewsets.ModelViewSet):
+    queryset = models.Pizza.objects.all().order_by('current_rating')
+    serializer_class = PizzaSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+                   
 def about(request):
     return render(request, "pizzas/about.html", {"title": 'about the app'})

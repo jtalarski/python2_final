@@ -1,5 +1,10 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 from . import views
+
+# Setup routers
+router = routers.DefaultRouter()
+router.register(r'pizzas', views.PizzaViewSet)
 
 urlpatterns = [
     # For initial function view
@@ -14,4 +19,7 @@ urlpatterns = [
     path('about/', views.about, name='about the app'),
     path('recipe_text/', views.recipe_text, name="recipe_text"), 
     path("pizza/submission/", views.SubmissionCreateView.as_view(), name="submissions-create"),
+    # Because I used viewsets instead of class or function views I can automatically generate 
+    # the URL conf for my API by registering the viewsets with a router class
+    path('pizza', include('rest_framework.urls', namespace='rest_framework')),
     ]

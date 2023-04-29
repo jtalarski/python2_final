@@ -30,5 +30,5 @@
 - [ ] Django site
 - [ ] Database integration CRUD
 - [ ] Visualization
-- [ ] API integration
+- [ ] An API creation with at least a search parameter available
 - [ ] Regex
