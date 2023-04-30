@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # local apps
     'pizzas',
     'users',
+    'myapi',
     
     # 3rd party apps
     'crispy_forms',
@@ -142,7 +143,11 @@ LOGIN_URL = 'user-login'
 
 # API pagination allows you to control how many objects per page are returned. For demonstration
 # purposes I am keeping it small.
-REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 3
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 3
+# }
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
+# }

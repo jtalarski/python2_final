@@ -34,7 +34,7 @@ class Pizza(models.Model):
         return reverse("pizza-detail", kwargs={"pk": self.pk})
     
     def __str__(self):   
-        return self.title
+        return self.title, self.author
     
 class Rating(models.Model):
     # Create one to many relationship from Pizza to Ratings
