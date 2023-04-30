@@ -1,0 +1,13 @@
+{% extends 'pizzas/base.html' %}
+
+<!--- -->
+<head>
+    <meta charset="UTF-8">
+    <title>Popular at Pizza World</title>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.1.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bokeh.org/bokeh/release/bokeh-3.1.0.min.css">
+</head>
+{% block content %} 
+    {{ the_div|safe }}
+    {{ the_script|safe }}
+{% endblock content %}

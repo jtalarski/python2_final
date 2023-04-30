@@ -1,0 +1,15 @@
+{% extends 'pizzas/base.html' %}
+<!--- -->
+
+{% block content %} 
+    <h1>Submission Detail Page</h1>
+    <div class="card my-4" style="width: 18rem;">
+        <div class="card-body">
+        <h5 class="card-title">{{ object.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">File: {{ object.submission }}</h6>
+        <h6 class="card-subtitle mb-2 text-body-secondary">Date Posted: {{ object.created_at|date:"F d, Y"}}</h6>
+        {% comment %} <a class="btn btn-outline-info" href="{% url 'sub_to_db' %}">Upload</a> {% endcomment %}
+        {% comment %} <a class="btn btn-outline-info" href="{% url 'rating-create' object.id %}">Rate Recipe</a> {% endcomment %}
+        </div>
+    </div>
+{% endblock content %}

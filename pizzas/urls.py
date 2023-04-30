@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
 from rest_framework import routers
 from . import views
 
@@ -19,6 +19,13 @@ urlpatterns = [
     path('about/', views.about, name='about the app'),
     path('recipe_text/', views.recipe_text, name="recipe_text"), 
     path("pizza/submission/", views.SubmissionCreateView.as_view(), name="submissions-create"),
+    path('pizza/sub_list/', views.SubmissionListView.as_view(), name="sub-home"),
+    path('sub_detail/<int:pk>', views.SubmissionDetailView.as_view(), name="submission-detail"),
+    # path('create_charts/', views.create_charts, name="create_charts"),
+    path('graph3/', views.graph3, name='my graph')
+    # path('popular/')
+    # re_path()
+    # path('pizza/sub_to_db/', views.sub_to_db, name='sub_to_db'),
     # path('pizza/', include(router.urls)),
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')), 
 ]
