@@ -6,16 +6,13 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 
-# # Import REST api modules
-# from rest_framework import viewsets
-# from rest_framework import permissions
-# from .serializers import PizzaSerializer
 
 # Local module imports
 from . import models
 
 # Create your views here.
 
+# Simple function view that allows readonly access to all records from pizza table
 def home(request):
     pizzas = models.Pizza.objects.all()
     context ={
@@ -30,7 +27,9 @@ def rating(request):
     }
     return render(request, "pizzas/ratings_create.html", context)
 
-# Views built off Django default class view
+# Views built off Django default class views
+
+# listview Django class view that allows readonly access to all records from pizza table
 class PizzaListView(ListView):
     model = models.Pizza
     # Override default Django default template name
@@ -38,10 +37,12 @@ class PizzaListView(ListView):
     # Override default Django  database object name
     context_object_name = 'pizzas'
     
+# Detailview Django class view that allows readonly and authenticated views of a single record in the pizza table
 class PizzaDetailView(DetailView):
     model = models.Pizza
     
-# Only authenticated users will be authorized to create a recipe
+# Createview class view that allows only authenticated user to create a new record in the pizza table. Template will 
+# redirect unauthenticated users to login
 class PizzaCreateView(LoginRequiredMixin, CreateView):
     model = models.Pizza
     # Designate fields that you want to expose to user
@@ -52,7 +53,7 @@ class PizzaCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-# Only authenticated users will be authorized to update a pizza     
+# Updateview Django class view that allows only authenticated users to update a record in the pizza table   
 class PizzaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = models.Pizza
     fields = ['title', 'description', 'directions', 'current_rating']
@@ -65,6 +66,7 @@ class PizzaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
     
+# Deleteview Django class view that allows only authenticated users to delete a record in the pizza table
 class PizzaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = models.Pizza.objects.all()
     # Redirect the user to the home page after deleting a pizza
@@ -76,7 +78,7 @@ class PizzaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == pizza.author    
  
 
-# Generate cookbook text file
+# Hidden function view allows user to print all records from the pizza table
 def recipe_text(request):
     response = HttpResponse(content_type='text/plain')
     response['Content-Disposition'] = 'attachment; filename=recipe.txt'
@@ -95,14 +97,7 @@ def recipe_text(request):
     response.writelines(lines)
     return response
  
- 
-# class SubmissionListView(ListView):
-#     to_view = models.Submission.objects.all()
-#     # Override default Django default template name
-#     template_name = 'pizzas/sub_view.html'
-#     # Override default Django  database object name
-#     context_object_name = 'to_view'
-    
+ # Create views that would allow a guest user to upload a recipe text file   
 class SubmissionCreateView(LoginRequiredMixin, CreateView):
     model = models.Submission
     # Designate fields that you want to expose to user
@@ -110,11 +105,9 @@ class SubmissionCreateView(LoginRequiredMixin, CreateView):
     fields = ['title', 'submission']
     success_url = reverse_lazy("pizzas-home")
  
-# # API-specific class that groups all common view behaviors into one
-# class PizzaViewSet(viewsets.ModelViewSet):
-#     queryset = models.Pizza.objects.all().order_by('current_rating')
-#     serializer_class = PizzaSerializer
-#     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-                   
+    def get_recipe():
+        new_submission_record = models.Submission.objects.latest(created_)
+
+# Simple function view that displays a readonly html file with a description of the site/application                   
 def about(request):
     return render(request, "pizzas/about.html", {"title": 'about the app'})

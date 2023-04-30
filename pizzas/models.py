@@ -50,7 +50,8 @@ class Rating(models.Model):
     
 class Submission(models.Model):
     title = models.TextField()
-    submission = models.FileField(upload_to='media')    
+    submission = models.FileField(upload_to='media')
+    created_at = models.DateTimeField(auto_now_add=True)    
     
     def __str__(self):   
         return self.title
