@@ -25,8 +25,10 @@ or Powershell. To install
 	- Linux/macOS: python3 -m pip install --user virtualenv
 	- Windows: py -m pip install --user virtualenv
 
-- Activate provided virtual environment contained in directory where you extracted
-files from the zipped archive.
+- Create virtual environment.
+	- virtualenv env (this will overwrite the existing env directory)
+
+- Activate virtual environment.
 	- Linux/macOS: source env/bin/activate
 	- Windows: .\env\Scripts\activate
 
