@@ -22,8 +22,8 @@ urlpatterns = [
     path('pizza/sub_list/', views.SubmissionListView.as_view(), name="sub-home"),
     path('sub_detail/<int:pk>', views.SubmissionDetailView.as_view(), name="submission-detail"),
     # path('create_charts/', views.create_charts, name="create_charts"),
-    path('graph3/', views.graph3, name='my graph'),
-    path('graph4/', views.graph4, name='my graph'),
+    path('graph3/', views.graph3, name='popular'),
+    path('graph4/', views.graph4, name='calories'),
     # path('popular/',)
     # path('popular/')
     # re_path()

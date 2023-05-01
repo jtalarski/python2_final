@@ -153,7 +153,7 @@ def graph4(request):
     top = df_calories['calories'].values.tolist()
     plot = figure(title = "Current Pizza Ratings Chart", x_range=pizzas)
     plot.vbar(x=pizzas, top = top, width=0.5)
-     
+    
     script, div = components(plot, CDN)    
     return render(request, "pizzas/graph3.html", {"the_script": script, "the_div": div})
                               
