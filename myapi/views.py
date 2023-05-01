@@ -15,17 +15,13 @@ class PizzaViewSet(generics.ListAPIView):
     filter_backends =(filters.SearchFilter)
     search_fields = ('author', 'title', 'current_rating')
 
-  
+  # Django rest framework class view that serves up queryset returned from database query
+  # Query returns all records in table order descending on current rating
 class PizzaList(viewsets.ModelViewSet):
-    # queryset = models.Pizza.objects.all()#.order_by('current_rating')
+    queryset = models.Pizza.objects.all().order_by('-current_rating')
     serializer_class = PizzaSerializer
-    
-    def get_queryset(self):
-        queryset = models.Pizza.objects.all()
-        author = self.request.QUERY_PARAMS.get('author', None)
-        if author is not None:
-            queryset = queryset.filter(pizza__author='author')
-        
+    permission_classes = [permissions.IsAuthenticated]
+            
    
     
     

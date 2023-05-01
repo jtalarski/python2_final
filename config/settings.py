@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'users',
     'myapi',
     
-    # 3rd party apps
+    # 3rd party apps used for styling forms
     'crispy_forms',
     'crispy_bootstrap5',
 ]
@@ -130,24 +130,18 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
+
+# Designate file system structure for storing uploaded files
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Designates the CSS stylesheet to use with forms
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
+# Default redirect after user successfully logs in
 LOGIN_REDIRECT_URL = 'pizzas-home'
 
+# Default redirect to send users when they need to authenticate before accessing secure views
 LOGIN_URL = 'user-login'
-
-# API pagination allows you to control how many objects per page are returned. For demonstration
-# purposes I am keeping it small.
-# REST_FRAMEWORK = {
-#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-#     'PAGE_SIZE': 3
-# }
-
-# REST_FRAMEWORK = {
-#     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
-# }
