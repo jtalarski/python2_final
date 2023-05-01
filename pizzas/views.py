@@ -14,8 +14,6 @@ from bokeh.plotting import figure
 from bokeh.embed import components
 from bokeh.resources import CDN
 
-
-
 # Local module imports
 from . import models
 
@@ -134,14 +132,33 @@ class SubmissionDetailView(LoginRequiredMixin, DetailView):
 def graph3(request):
     
     
-    plot = figure(title = "Amount of sleep throughout my work week")
-    y =[1, 2, 3, 4, 5]
-    x =[8, 5, 5, 6, 8]
-    plot.line(y,x)
-
+    pizza_rate = models.Pizza.objects.all().values('title', 'current_rating')
+    df_pizza = pd.DataFrame(list(pizza_rate))
+    print(df_pizza.to_string())
+    
+    pizzas = df_pizza['title'].values.tolist()
+    top = df_pizza['current_rating'].values.tolist()
+    plot = figure(title = "Current Pizza Ratings Chart", x_range=pizzas)
+    plot.vbar(x=pizzas, top = top, width=0.5)
+    # show(plot)
+    
     script, div = components(plot, CDN)    
-    return render(request, "pizzas/popular.html", {"the_script": script, "the_div": div})
+    return render(request, "pizzas/graph3.html", {"the_script": script, "the_div": div})
+
+def graph4(request):
+      
+    recipe_count = models.Pizza.objects.all().values('author_id', 'title')
+    df_count = pd.DataFrame(list(recipe_count))
+    test = df_count.groupby(['author_id', 'title']).size().unstack(level=1)
+    test.plot(kind=bar)
+    
+    
+    return redirect('/')
                           
 # Simple function view that displays a readonly html file with a description of the site/application                   
 def about(request):
     return render(request, "pizzas/about.html", {"title": 'about the app'})
+
+
+    
+    

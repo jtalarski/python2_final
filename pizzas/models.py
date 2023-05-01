@@ -24,6 +24,7 @@ class Pizza(models.Model):
     # Automatically add date and time that the record was create
     # Provide field for user to select a choice for a rating. ties to class RatingChoice
     current_rating = models.IntegerField(default=0, choices=RatingChoice.user_rating)
+    
     created_at = models.DateTimeField(auto_now_add=True)
     # Automatically add date and time that the record was updated
     updated_at = models.DateTimeField(auto_now=True) 
