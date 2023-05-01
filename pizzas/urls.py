@@ -9,7 +9,8 @@ from . import views
 urlpatterns = [
     # For initial function view
     # path('', views.home, name='pizzas-home'),
-    # For class view
+    
+    # Builtin Django class views 
     path('', views.PizzaListView.as_view(), name='pizzas-home'),
     # Use dynamic URL syntax to pass pizza id
     path('pizza/<int:pk>', views.PizzaDetailView.as_view(), name="pizza-detail"),
@@ -21,13 +22,10 @@ urlpatterns = [
     path("pizza/submission/", views.SubmissionCreateView.as_view(), name="submissions-create"),
     path('pizza/sub_list/', views.SubmissionListView.as_view(), name="sub-home"),
     path('sub_detail/<int:pk>', views.SubmissionDetailView.as_view(), name="submission-detail"),
-    # path('create_charts/', views.create_charts, name="create_charts"),
+    
+    # Specific views that provide for Bokeh visualizations. These are used primarily because the views
+    # are linked to different style sheets and Javascript libraries than those accessed through
+    # pizzas/template/pizzas/base.html 
     path('graph3/', views.graph3, name='popular'),
     path('graph4/', views.graph4, name='calories'),
-    # path('popular/',)
-    # path('popular/')
-    # re_path()
-    # path('pizza/sub_to_db/', views.sub_to_db, name='sub_to_db'),
-    # path('pizza/', include(router.urls)),
-    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')), 
 ]
