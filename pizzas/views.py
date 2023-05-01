@@ -59,7 +59,7 @@ class PizzaDetailView(DetailView):
 class PizzaCreateView(LoginRequiredMixin, CreateView):
     model = models.Pizza
     # Designate fields that you want to expose to user
-    fields = ['title', 'description', 'directions']
+    fields = ['title', 'description', 'directions', 'current_rating', 'calories']
     
     # Provide the recipe record author since author field is not displayed on form
     def form_valid(self, form):
@@ -69,7 +69,7 @@ class PizzaCreateView(LoginRequiredMixin, CreateView):
 # Updateview Django class view that allows only authenticated users to update a record in the pizza table   
 class PizzaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = models.Pizza
-    fields = ['title', 'description', 'directions', 'current_rating']
+    fields = ['title', 'description', 'directions', 'current_rating', 'calories']
 
     def test_func(self):
         recipe = self.get_object()
@@ -81,14 +81,14 @@ class PizzaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
 # Deleteview Django class view that allows only authenticated users to delete a record in the pizza table
 class PizzaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = models.Pizza.objects.all()
+    model = models.Pizza
     # Redirect the user to the home page after deleting a pizza
     success_url = reverse_lazy('pizzas-home')
     
     # Only allow a user to delete her own recipe
     def test_func(self):
         pizza = self.get_object()
-        return self.request.user == pizza.author    
+        return self.request.user == pizza.author
  
 
 # Hidden function view allows user to print all records from the pizza table

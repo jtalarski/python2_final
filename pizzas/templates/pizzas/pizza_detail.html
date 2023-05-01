@@ -12,6 +12,8 @@
           <p class="card-text">Description: {{ object.description}}</p>
           <p class="card-text">Directions: {{ object.directions}}</p><br>
           <h6 class="card-text">Rating: {{ object.current_rating }}</h6>
+          <h6 class="card-text">Calories: {{ object.calories }}</h6>
+          
           <h6 class="card-subtitle mb-2 text-body-secondary">Date Posted: {{ object.updated_at|date:"F d, Y"}}</h6>
           {% comment %} <a class="btn btn-outline-info" href="{% url 'recipe_text' object.id %}">Print</a> {% endcomment %}
           {% comment %} <a class="btn btn-outline-info" href="{% url 'rating-create' object.id %}">Rate Recipe</a> {% endcomment %}

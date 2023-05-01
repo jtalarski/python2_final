@@ -39,7 +39,7 @@ class Pizza(models.Model):
     
     # String function so that when you output the database object more descriptive and readable
     def __str__(self):   
-        return self.title, self.author
+        return self.title
  
  # Model created for future use to store multiple user ratings for a single pizza.
  # Future planned functionality could allow unauthenticated user to rate any given pizza
