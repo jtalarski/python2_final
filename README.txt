@@ -39,9 +39,19 @@ to which you extracted the zipped archive files
 	- Windows: where python
 
 - Use pip to install required Python packages/libraries/modules using the provided file
-requirements.
+requirements. (this could take a while)
 	- Linux/macOS: python3 -m pip install -r requirements.txt
 	- Windows: py -m pip install -r requirements.txt
+
+A FEW LAST SETUP THINGS TO GET SETUP FOR RUNNING THE APPLICATION
+- Create a directory to house uploaded files
+	- Using your favorite process create a new multi level directory in the application's root directory
+	/media/media/
+- Run three Django specific commands
+	- python3 manage.py makemigrations
+	- python3 manage.py migrate
+	- python3 manage.py createsuperuser
+		- follow prompts
 
 
 RUNNING THE PROGRAM:
