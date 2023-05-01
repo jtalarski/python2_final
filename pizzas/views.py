@@ -147,14 +147,16 @@ def graph3(request):
 
 def graph4(request):
       
-    recipe_count = models.Pizza.objects.all().values('author_id', 'title')
-    df_count = pd.DataFrame(list(recipe_count))
-    test = df_count.groupby(['author_id', 'title']).size().unstack(level=1)
-    test.plot(kind=bar)
-    
-    
-    return redirect('/')
-                          
+    calories_slice = models.Pizza.objects.all().values('title','calories')
+    df_calories = pd.DataFrame(list(calories_slice))
+    pizzas = df_calories['title'].values.tolist()
+    top = df_calories['calories'].values.tolist()
+    plot = figure(title = "Current Pizza Ratings Chart", x_range=pizzas)
+    plot.vbar(x=pizzas, top = top, width=0.5)
+     
+    script, div = components(plot, CDN)    
+    return render(request, "pizzas/graph3.html", {"the_script": script, "the_div": div})
+                              
 # Simple function view that displays a readonly html file with a description of the site/application                   
 def about(request):
     return render(request, "pizzas/about.html", {"title": 'about the app'})
